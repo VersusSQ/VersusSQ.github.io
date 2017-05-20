@@ -90,17 +90,17 @@
 
 
 
-<meta name="description" content="import time  date = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,         7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} month = {&amp;quot;Jan&amp;quot;: 1, &amp;quot;Feb&amp;quot;: 2, &amp;quot;Mar&amp;quot;: 3, &amp;quot;Apr&amp;quot;">
+<meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 <meta name="keywords" content="code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算已经出生多久和距下一次生日的天数">
 <meta property="og:url" content="http://VersusSQ.github.io/2017/05/20/计算出生多久与距下次生日的天数/index.html">
 <meta property="og:site_name" content="SunQiang Blog">
-<meta property="og:description" content="import time  date = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,         7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} month = {&amp;quot;Jan&amp;quot;: 1, &amp;quot;Feb&amp;quot;: 2, &amp;quot;Mar&amp;quot;: 3, &amp;quot;Apr&amp;quot;">
-<meta property="og:updated_time" content="2017-05-20T13:36:30.291Z">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:updated_time" content="2017-05-20T14:14:00.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算已经出生多久和距下一次生日的天数">
-<meta name="twitter:description" content="import time  date = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,         7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} month = {&amp;quot;Jan&amp;quot;: 1, &amp;quot;Feb&amp;quot;: 2, &amp;quot;Mar&amp;quot;: 3, &amp;quot;Apr&amp;quot;">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
 
 
 
@@ -259,7 +259,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sun Qiang">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/luffy.JPG">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -340,139 +340,7 @@
       
 
       
-        <pre><code>import time
-
-date = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-        7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
-month = {&quot;Jan&quot;: 1, &quot;Feb&quot;: 2, &quot;Mar&quot;: 3, &quot;Apr&quot;: 4, &quot;May&quot;: 5, &quot;Jun&quot;: 6,
-         &quot;Jul&quot;: 7, &quot;Aus&quot;: 8, &quot;Sep&quot;: 9, &quot;Oct&quot;: 10, &quot;Nov&quot;: 11, &quot;Dec&quot;: 12}
-
-# 计算出生了多久的函数
-def live_days(start_date, end_date):
-    start = {}
-    end = {}
-    # 用于计算总天数
-    days = 0
-    start[&quot;yy&quot;], start[&quot;mm&quot;], start[&quot;dd&quot;] = int(start_date[0:4]), int(start_date[4:6]), int(start_date[6:])
-    end[&quot;yy&quot;], end[&quot;mm&quot;], end[&quot;dd&quot;] = int(end_date[4]), month[end_date[1]], int(end_date[2])
-    date[2] = 28
-
-    if end[&quot;yy&quot;] &lt; start[&quot;yy&quot;] or (end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] &lt; start[&quot;mm&quot;]) or \
-        (end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &lt; start[&quot;dd&quot;]):
-        print(&quot;出生年月大于当前日期，请重新输入！&quot;)
-
-    # 同年同月不同日
-    elif end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &gt;= start[&quot;dd&quot;]:
-        print(&quot;从出生至今已%d天&quot; % sum_day)
-
-    # 同年不同月
-    elif end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] &gt; start[&quot;mm&quot;]:
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(start[&quot;mm&quot;]+1, end[&quot;mm&quot;]):
-            days += date[i]
-        sum_day = days + end[&quot;dd&quot;] + (date[start[&quot;mm&quot;]] - start[&quot;dd&quot;])
-        print(&quot;从出生至今已%d天&quot; % sum_day)
-
-    # 不同年份
-    elif end[&quot;yy&quot;] &gt; start[&quot;yy&quot;]:
-
-        # end_date
-        result_days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-
-        if end[&quot;mm&quot;] == 1:
-            result_end = end[&quot;dd&quot;]
-        else:
-            for i in range(1, end[&quot;mm&quot;]):
-                result_days += date[i]
-            result_end = end[&quot;dd&quot;] + result_days
-
-        date[2] = 28
-        # start_date
-        start_days = 0
-        if start[&quot;yy&quot;] % 400 == 0 or (start[&quot;yy&quot;] % 4 == 0 and start[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-
-        for i in range(start[&quot;mm&quot;]+1, 13):
-            start_days += date[i]
-        result_start = date[start[&quot;mm&quot;]]-start[&quot;dd&quot;] + start_days
-
-        # end[&quot;yy&quot;]-start[&quot;yy&quot;]
-        if end[&quot;yy&quot;] - start[&quot;yy&quot;] == 1:
-            sum_day = result_start + result_end
-            print(&quot;从出生至今已%d天&quot; % sum_day)
-        else:
-            middle_date = 0
-            for i in range(start[&quot;yy&quot;] + 1, end[&quot;yy&quot;]):
-                if i % 400 == 0 or (i % 4 == 0 and i % 100 != 0):
-                    middle_date += 366
-                else:
-                    middle_date += 365
-            sum_day = result_start + result_end + middle_date
-            print(&quot;从出生至今已%d天&quot; % sum_day)
-
-# 计算距下次过生日的天数
-def next_birthday(start_date, end_date):
-    start = {}
-    end = {}
-    days = 0
-    start[&quot;yy&quot;], start[&quot;mm&quot;], start[&quot;dd&quot;] = int(start_date[0:4]), int(start_date[4:6]), int(start_date[6:])
-    end[&quot;yy&quot;], end[&quot;mm&quot;], end[&quot;dd&quot;] = int(end_date[4]), month[end_date[1]], int(end_date[2])
-    date[2] = 28
-
-    # 距离下次过生日的天数
-    # 当前日期还未到生日那天
-    if end[&quot;mm&quot;] &lt; start[&quot;mm&quot;]:
-        days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(end[&quot;mm&quot;]+1, start[&quot;mm&quot;]):
-            days += date[i]
-        sum_day = days + start[&quot;dd&quot;] + (date[end[&quot;mm&quot;]] - end[&quot;dd&quot;])
-        print(&quot;距离下次过生日还有%d天&quot; % sum_day)
-
-    elif end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &lt;= start[&quot;dd&quot;]:
-        print(&quot;距离下次过生日还有%d天&quot; % (start[&quot;dd&quot;] - end[&quot;dd&quot;]))
-
-    elif end[&quot;mm&quot;] &gt; start[&quot;mm&quot;]:
-        # end_date
-        end_days = 0
-        if (end[&quot;yy&quot;] + 1) % 400 == 0 or ((end[&quot;yy&quot;] + 1) % 4 == 0 and (end[&quot;yy&quot;] + 1) % 100 != 0):
-            date[2] = 29
-
-        if start[&quot;mm&quot;] == 1:
-            result_end = start[&quot;dd&quot;]
-        else:
-            for i in range(1, start[&quot;mm&quot;]):
-                end_days += date[i]
-            result_end = start[&quot;dd&quot;] + end_days
-
-        date[2] = 28
-        # start_date
-        start_days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(end[&quot;mm&quot;] + 1, 13):
-            start_days += date[i]
-        result_start = date[end[&quot;mm&quot;]] - end[&quot;dd&quot;] + start_days
-        sum_day = result_end + result_start
-        print(result_start)
-        print(result_end)
-        print(&quot;距离下次过生日还有%d天&quot; % sum_day)
-
-
-def main():
-    while True:
-        birth_day = input(&quot;请输入你的出生年月日（格式：20170112）：&quot;)
-        now = time.ctime().split()
-        live_days(birth_day, now)
-        next_birthday(birth_day, now)
-
-if __name__ == &quot;__main__&quot;:
-    main()
-</code></pre>
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line">date = &#123;<span class="number">1</span>: <span class="number">31</span>, <span class="number">2</span>: <span class="number">28</span>, <span class="number">3</span>: <span class="number">31</span>, <span class="number">4</span>: <span class="number">30</span>, <span class="number">5</span>: <span class="number">31</span>, <span class="number">6</span>: <span class="number">30</span>,</div><div class="line">        <span class="number">7</span>: <span class="number">31</span>, <span class="number">8</span>: <span class="number">31</span>, <span class="number">9</span>: <span class="number">30</span>, <span class="number">10</span>: <span class="number">31</span>, <span class="number">11</span>: <span class="number">30</span>, <span class="number">12</span>: <span class="number">31</span>&#125;</div><div class="line">month = &#123;<span class="string">"Jan"</span>: <span class="number">1</span>, <span class="string">"Feb"</span>: <span class="number">2</span>, <span class="string">"Mar"</span>: <span class="number">3</span>, <span class="string">"Apr"</span>: <span class="number">4</span>, <span class="string">"May"</span>: <span class="number">5</span>, <span class="string">"Jun"</span>: <span class="number">6</span>,</div><div class="line">         <span class="string">"Jul"</span>: <span class="number">7</span>, <span class="string">"Aus"</span>: <span class="number">8</span>, <span class="string">"Sep"</span>: <span class="number">9</span>, <span class="string">"Oct"</span>: <span class="number">10</span>, <span class="string">"Nov"</span>: <span class="number">11</span>, <span class="string">"Dec"</span>: <span class="number">12</span>&#125;</div><div class="line"></div><div class="line"><span class="comment"># 计算出生了多久的函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">live_days</span><span class="params">(start_date, end_date)</span>:</span></div><div class="line">    start = &#123;&#125;</div><div class="line">    end = &#123;&#125;</div><div class="line">    <span class="comment"># 用于计算总天数</span></div><div class="line">    days = <span class="number">0</span></div><div class="line">    start[<span class="string">"yy"</span>], start[<span class="string">"mm"</span>], start[<span class="string">"dd"</span>] = int(start_date[<span class="number">0</span>:<span class="number">4</span>]), int(start_date[<span class="number">4</span>:<span class="number">6</span>]), int(start_date[<span class="number">6</span>:])</div><div class="line">    end[<span class="string">"yy"</span>], end[<span class="string">"mm"</span>], end[<span class="string">"dd"</span>] = int(end_date[<span class="number">4</span>]), month[end_date[<span class="number">1</span>]], int(end_date[<span class="number">2</span>])</div><div class="line">    date[<span class="number">2</span>] = <span class="number">28</span></div><div class="line">    </div><div class="line">    <span class="keyword">if</span> end[<span class="string">"yy"</span>] &lt; start[<span class="string">"yy"</span>] <span class="keyword">or</span> (end[<span class="string">"yy"</span>] == start[<span class="string">"yy"</span>] <span class="keyword">and</span> end[<span class="string">"mm"</span>] &lt; start[<span class="string">"mm"</span>]) <span class="keyword">or</span> \</div><div class="line">        (end[<span class="string">"yy"</span>] == start[<span class="string">"yy"</span>] <span class="keyword">and</span> end[<span class="string">"mm"</span>] == start[<span class="string">"mm"</span>] <span class="keyword">and</span> end[<span class="string">"dd"</span>] &lt; start[<span class="string">"dd"</span>]):</div><div class="line">        print(<span class="string">"出生年月大于当前日期，请重新输入！"</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># 同年同月不同日</span></div><div class="line">    <span class="keyword">elif</span> end[<span class="string">"yy"</span>] == start[<span class="string">"yy"</span>] <span class="keyword">and</span> end[<span class="string">"mm"</span>] == start[<span class="string">"mm"</span>] <span class="keyword">and</span> end[<span class="string">"dd"</span>] &gt;= start[<span class="string">"dd"</span>]:</div><div class="line">        print(<span class="string">"从出生至今已%d天"</span> % sum_day)</div><div class="line">    </div><div class="line">    <span class="comment"># 同年不同月</span></div><div class="line">    <span class="keyword">elif</span> end[<span class="string">"yy"</span>] == start[<span class="string">"yy"</span>] <span class="keyword">and</span> end[<span class="string">"mm"</span>] &gt; start[<span class="string">"mm"</span>]:</div><div class="line">        <span class="keyword">if</span> end[<span class="string">"yy"</span>] % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (end[<span class="string">"yy"</span>] % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> end[<span class="string">"yy"</span>] % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start[<span class="string">"mm"</span>]+<span class="number">1</span>, end[<span class="string">"mm"</span>]):</div><div class="line">            days += date[i]</div><div class="line">        sum_day = days + end[<span class="string">"dd"</span>] + (date[start[<span class="string">"mm"</span>]] - start[<span class="string">"dd"</span>])</div><div class="line">        print(<span class="string">"从出生至今已%d天"</span> % sum_day)</div><div class="line">    </div><div class="line">    <span class="comment"># 不同年份</span></div><div class="line">    <span class="keyword">elif</span> end[<span class="string">"yy"</span>] &gt; start[<span class="string">"yy"</span>]:</div><div class="line">        </div><div class="line">        <span class="comment"># end_date</span></div><div class="line">        result_days = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> end[<span class="string">"yy"</span>] % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (end[<span class="string">"yy"</span>] % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> end[<span class="string">"yy"</span>] % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> end[<span class="string">"mm"</span>] == <span class="number">1</span>:</div><div class="line">            result_end = end[<span class="string">"dd"</span>]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, end[<span class="string">"mm"</span>]):</div><div class="line">                result_days += date[i]</div><div class="line">            result_end = end[<span class="string">"dd"</span>] + result_days</div><div class="line"></div><div class="line">        date[<span class="number">2</span>] = <span class="number">28</span></div><div class="line">        <span class="comment"># start_date</span></div><div class="line">        start_days = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> start[<span class="string">"yy"</span>] % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (start[<span class="string">"yy"</span>] % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> start[<span class="string">"yy"</span>] % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line"></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(start[<span class="string">"mm"</span>]+<span class="number">1</span>, <span class="number">13</span>):</div><div class="line">            start_days += date[i]</div><div class="line">        result_start = date[start[<span class="string">"mm"</span>]]-start[<span class="string">"dd"</span>] + start_days</div><div class="line"></div><div class="line">        <span class="comment"># end["yy"]-start["yy"]</span></div><div class="line">        <span class="keyword">if</span> end[<span class="string">"yy"</span>] - start[<span class="string">"yy"</span>] == <span class="number">1</span>:</div><div class="line">            sum_day = result_start + result_end</div><div class="line">            print(<span class="string">"从出生至今已%d天"</span> % sum_day)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            middle_date = <span class="number">0</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(start[<span class="string">"yy"</span>] + <span class="number">1</span>, end[<span class="string">"yy"</span>]):</div><div class="line">                <span class="keyword">if</span> i % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (i % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> i % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">                    middle_date += <span class="number">366</span></div><div class="line">                <span class="keyword">else</span>:</div><div class="line">                    middle_date += <span class="number">365</span></div><div class="line">            sum_day = result_start + result_end + middle_date</div><div class="line">            print(<span class="string">"从出生至今已%d天"</span> % sum_day)</div><div class="line"></div><div class="line"><span class="comment"># 计算距下次过生日的天数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">next_birthday</span><span class="params">(start_date, end_date)</span>:</span></div><div class="line">    start = &#123;&#125;</div><div class="line">    end = &#123;&#125;</div><div class="line">    days = <span class="number">0</span></div><div class="line">    start[<span class="string">"yy"</span>], start[<span class="string">"mm"</span>], start[<span class="string">"dd"</span>] = int(start_date[<span class="number">0</span>:<span class="number">4</span>]), int(start_date[<span class="number">4</span>:<span class="number">6</span>]), int(start_date[<span class="number">6</span>:])</div><div class="line">    end[<span class="string">"yy"</span>], end[<span class="string">"mm"</span>], end[<span class="string">"dd"</span>] = int(end_date[<span class="number">4</span>]), month[end_date[<span class="number">1</span>]], int(end_date[<span class="number">2</span>])</div><div class="line">    date[<span class="number">2</span>] = <span class="number">28</span></div><div class="line">    </div><div class="line">    <span class="comment"># 距离下次过生日的天数</span></div><div class="line">    <span class="comment"># 当前日期还未到生日那天</span></div><div class="line">    <span class="keyword">if</span> end[<span class="string">"mm"</span>] &lt; start[<span class="string">"mm"</span>]:</div><div class="line">        days = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> end[<span class="string">"yy"</span>] % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (end[<span class="string">"yy"</span>] % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> end[<span class="string">"yy"</span>] % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(end[<span class="string">"mm"</span>]+<span class="number">1</span>, start[<span class="string">"mm"</span>]):</div><div class="line">            days += date[i]</div><div class="line">        sum_day = days + start[<span class="string">"dd"</span>] + (date[end[<span class="string">"mm"</span>]] - end[<span class="string">"dd"</span>])</div><div class="line">        print(<span class="string">"距离下次过生日还有%d天"</span> % sum_day)</div><div class="line"></div><div class="line">    <span class="keyword">elif</span> end[<span class="string">"mm"</span>] == start[<span class="string">"mm"</span>] <span class="keyword">and</span> end[<span class="string">"dd"</span>] &lt;= start[<span class="string">"dd"</span>]:</div><div class="line">        print(<span class="string">"距离下次过生日还有%d天"</span> % (start[<span class="string">"dd"</span>] - end[<span class="string">"dd"</span>]))</div><div class="line"></div><div class="line">    <span class="keyword">elif</span> end[<span class="string">"mm"</span>] &gt; start[<span class="string">"mm"</span>]:</div><div class="line">        <span class="comment"># end_date</span></div><div class="line">        end_days = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> (end[<span class="string">"yy"</span>] + <span class="number">1</span>) % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> ((end[<span class="string">"yy"</span>] + <span class="number">1</span>) % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> (end[<span class="string">"yy"</span>] + <span class="number">1</span>) % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> start[<span class="string">"mm"</span>] == <span class="number">1</span>:</div><div class="line">            result_end = start[<span class="string">"dd"</span>]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, start[<span class="string">"mm"</span>]):</div><div class="line">                end_days += date[i]</div><div class="line">            result_end = start[<span class="string">"dd"</span>] + end_days</div><div class="line"></div><div class="line">        date[<span class="number">2</span>] = <span class="number">28</span></div><div class="line">        <span class="comment"># start_date</span></div><div class="line">        start_days = <span class="number">0</span></div><div class="line">        <span class="keyword">if</span> end[<span class="string">"yy"</span>] % <span class="number">400</span> == <span class="number">0</span> <span class="keyword">or</span> (end[<span class="string">"yy"</span>] % <span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> end[<span class="string">"yy"</span>] % <span class="number">100</span> != <span class="number">0</span>):</div><div class="line">            date[<span class="number">2</span>] = <span class="number">29</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(end[<span class="string">"mm"</span>] + <span class="number">1</span>, <span class="number">13</span>):</div><div class="line">            start_days += date[i]</div><div class="line">        result_start = date[end[<span class="string">"mm"</span>]] - end[<span class="string">"dd"</span>] + start_days</div><div class="line">        sum_day = result_end + result_start</div><div class="line">        print(result_start)</div><div class="line">        print(result_end)</div><div class="line">        print(<span class="string">"距离下次过生日还有%d天"</span> % sum_day)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        birth_day = input(<span class="string">"请输入你的出生年月日（格式：20170112）："</span>)</div><div class="line">        now = time.ctime().split()</div><div class="line">        live_days(birth_day, now)</div><div class="line">        next_birthday(birth_day, now)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    main()</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -557,7 +425,7 @@ if __name__ == &quot;__main__&quot;:
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/uploads/luffy.JPG"
                alt="Sun Qiang" />
           <p class="site-author-name" itemprop="name">Sun Qiang</p>
            

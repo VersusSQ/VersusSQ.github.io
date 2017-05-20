@@ -259,7 +259,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sun Qiang">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/luffy.JPG">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -344,140 +344,15 @@
       
         
           
-            <pre><code>import time
-
-date = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
-        7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
-month = {&quot;Jan&quot;: 1, &quot;Feb&quot;: 2, &quot;Mar&quot;: 3, &quot;Apr&quot;: 4, &quot;May&quot;: 5, &quot;Jun&quot;: 6,
-         &quot;Jul&quot;: 7, &quot;Aus&quot;: 8, &quot;Sep&quot;: 9, &quot;Oct&quot;: 10, &quot;Nov&quot;: 11, &quot;Dec&quot;: 12}
-
-# 计算出生了多久的函数
-def live_days(start_date, end_date):
-    start = {}
-    end = {}
-    # 用于计算总天数
-    days = 0
-    start[&quot;yy&quot;], start[&quot;mm&quot;], start[&quot;dd&quot;] = int(start_date[0:4]), int(start_date[4:6]), int(start_date[6:])
-    end[&quot;yy&quot;], end[&quot;mm&quot;], end[&quot;dd&quot;] = int(end_date[4]), month[end_date[1]], int(end_date[2])
-    date[2] = 28
-
-    if end[&quot;yy&quot;] &lt; start[&quot;yy&quot;] or (end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] &lt; start[&quot;mm&quot;]) or \
-        (end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &lt; start[&quot;dd&quot;]):
-        print(&quot;出生年月大于当前日期，请重新输入！&quot;)
-
-    # 同年同月不同日
-    elif end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &gt;= start[&quot;dd&quot;]:
-        print(&quot;从出生至今已%d天&quot; % sum_day)
-
-    # 同年不同月
-    elif end[&quot;yy&quot;] == start[&quot;yy&quot;] and end[&quot;mm&quot;] &gt; start[&quot;mm&quot;]:
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(start[&quot;mm&quot;]+1, end[&quot;mm&quot;]):
-            days += date[i]
-        sum_day = days + end[&quot;dd&quot;] + (date[start[&quot;mm&quot;]] - start[&quot;dd&quot;])
-        print(&quot;从出生至今已%d天&quot; % sum_day)
-
-    # 不同年份
-    elif end[&quot;yy&quot;] &gt; start[&quot;yy&quot;]:
-
-        # end_date
-        result_days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-
-        if end[&quot;mm&quot;] == 1:
-            result_end = end[&quot;dd&quot;]
-        else:
-            for i in range(1, end[&quot;mm&quot;]):
-                result_days += date[i]
-            result_end = end[&quot;dd&quot;] + result_days
-
-        date[2] = 28
-        # start_date
-        start_days = 0
-        if start[&quot;yy&quot;] % 400 == 0 or (start[&quot;yy&quot;] % 4 == 0 and start[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-
-        for i in range(start[&quot;mm&quot;]+1, 13):
-            start_days += date[i]
-        result_start = date[start[&quot;mm&quot;]]-start[&quot;dd&quot;] + start_days
-
-        # end[&quot;yy&quot;]-start[&quot;yy&quot;]
-        if end[&quot;yy&quot;] - start[&quot;yy&quot;] == 1:
-            sum_day = result_start + result_end
-            print(&quot;从出生至今已%d天&quot; % sum_day)
-        else:
-            middle_date = 0
-            for i in range(start[&quot;yy&quot;] + 1, end[&quot;yy&quot;]):
-                if i % 400 == 0 or (i % 4 == 0 and i % 100 != 0):
-                    middle_date += 366
-                else:
-                    middle_date += 365
-            sum_day = result_start + result_end + middle_date
-            print(&quot;从出生至今已%d天&quot; % sum_day)
-
-# 计算距下次过生日的天数
-def next_birthday(start_date, end_date):
-    start = {}
-    end = {}
-    days = 0
-    start[&quot;yy&quot;], start[&quot;mm&quot;], start[&quot;dd&quot;] = int(start_date[0:4]), int(start_date[4:6]), int(start_date[6:])
-    end[&quot;yy&quot;], end[&quot;mm&quot;], end[&quot;dd&quot;] = int(end_date[4]), month[end_date[1]], int(end_date[2])
-    date[2] = 28
-
-    # 距离下次过生日的天数
-    # 当前日期还未到生日那天
-    if end[&quot;mm&quot;] &lt; start[&quot;mm&quot;]:
-        days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(end[&quot;mm&quot;]+1, start[&quot;mm&quot;]):
-            days += date[i]
-        sum_day = days + start[&quot;dd&quot;] + (date[end[&quot;mm&quot;]] - end[&quot;dd&quot;])
-        print(&quot;距离下次过生日还有%d天&quot; % sum_day)
-
-    elif end[&quot;mm&quot;] == start[&quot;mm&quot;] and end[&quot;dd&quot;] &lt;= start[&quot;dd&quot;]:
-        print(&quot;距离下次过生日还有%d天&quot; % (start[&quot;dd&quot;] - end[&quot;dd&quot;]))
-
-    elif end[&quot;mm&quot;] &gt; start[&quot;mm&quot;]:
-        # end_date
-        end_days = 0
-        if (end[&quot;yy&quot;] + 1) % 400 == 0 or ((end[&quot;yy&quot;] + 1) % 4 == 0 and (end[&quot;yy&quot;] + 1) % 100 != 0):
-            date[2] = 29
-
-        if start[&quot;mm&quot;] == 1:
-            result_end = start[&quot;dd&quot;]
-        else:
-            for i in range(1, start[&quot;mm&quot;]):
-                end_days += date[i]
-            result_end = start[&quot;dd&quot;] + end_days
-
-        date[2] = 28
-        # start_date
-        start_days = 0
-        if end[&quot;yy&quot;] % 400 == 0 or (end[&quot;yy&quot;] % 4 == 0 and end[&quot;yy&quot;] % 100 != 0):
-            date[2] = 29
-        for i in range(end[&quot;mm&quot;] + 1, 13):
-            start_days += date[i]
-        result_start = date[end[&quot;mm&quot;]] - end[&quot;dd&quot;] + start_days
-        sum_day = result_end + result_start
-        print(result_start)
-        print(result_end)
-        print(&quot;距离下次过生日还有%d天&quot; % sum_day)
-
-
-def main():
-    while True:
-        birth_day = input(&quot;请输入你的出生年月日（格式：20170112）：&quot;)
-        now = time.ctime().split()
-        live_days(birth_day, now)
-        next_birthday(birth_day, now)
-
-if __name__ == &quot;__main__&quot;:
-    main()
-</code></pre>
-          
+          123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/20/计算出生多久与距下次生日的天数/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -543,7 +418,7 @@ if __name__ == &quot;__main__&quot;:
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/uploads/luffy.JPG"
                alt="Sun Qiang" />
           <p class="site-author-name" itemprop="name">Sun Qiang</p>
            
